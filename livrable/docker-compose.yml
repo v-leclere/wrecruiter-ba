@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  py-web:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8081
+    volumes:
+      - .:/app
+    ports:
+      - 8081:8081
+  db:
+    image: mariadb:10.7
+    container_name: test-db
+    restart: no
+    environment:
+      MYSQL_DATABASE: test-mdb
+      MYSQL_ROOT_PASSWORD: test-mst-pwd
+      MYSQL_PASSWORD: test-pwd
+      MYSQL_USER: test-user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mariadb
+    ports:
+      - "3316:3316"
+    volumes:
+      - ./docker-compose/mariadb:/docker-entrypoint-initdb.d
+    networks:
+      - test
+networks:
+  test:
+    driver: bridge
