@@ -1,6 +1,6 @@
 import unittest
 
-from app.rpn import Calculator
+from app.rpn.calculator import Calculator
 
 
 def resolve(expression):

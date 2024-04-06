@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from app.rpn import Calculator
+
+from app.rpn.calculator import Calculator
+
 
 class Expression(BaseModel):
     expression: str
